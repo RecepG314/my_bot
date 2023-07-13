@@ -21,7 +21,7 @@ def generate_launch_description():
     xacro_file = os.path.join(pkg_path,'description','robot.urdf.xacro')
     # robot_description_config = xacro.process_file(xacro_file).toxml()
     robot_description_config = Command(['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control])
-
+    
     # Create a robot_state_publisher node
     params = {'robot_description': robot_description_config, 'use_sim_time': use_sim_time}
     node_robot_state_publisher = Node(
@@ -32,7 +32,7 @@ def generate_launch_description():
     )
 
 
-    # Launch! marrabalar
+    # Launch!
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
@@ -41,7 +41,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'use_ros2_control',
             default_value='true',
-            description='Use use_ros2_control if true'),
+            description='Use ros2_control if true'),
 
         node_robot_state_publisher
     ])
